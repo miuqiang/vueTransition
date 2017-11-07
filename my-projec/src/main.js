@@ -7,7 +7,7 @@ import axios from 'axios'
 
 Vue.config.productionTip = false
 
-axios.defaults.baseURL = 'http://api.hyju.com.cn';
+axios.defaults.baseURL = '';
 Vue.prototype.$http = axios
 
 
