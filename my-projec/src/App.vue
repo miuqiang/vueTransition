@@ -24,13 +24,20 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
 @import '../static/reset.css';
-#app {
-    height:100%;
+body {
+	margin: 0px;
+	padding: 0px;
+	/*background: url(assets/bg1.jpg) center !important;
+		background-size: cover;*/
+	/* background: #1F2D3D; */
+	font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
+	font-size: 14px;
+	-webkit-font-smoothing: antialiased;
 }
 .child-view {
-  position: absolute;
+//   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
