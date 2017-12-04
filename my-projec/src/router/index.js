@@ -44,8 +44,8 @@ export default new Router({
             name: '门锁检测',
             iconCls: 'el-icon-tickets',
             children: [
-                { path: '/online_check', component: resolve => require(['@/components/Start'], resolve), name: '在线检测' },
-                { path: '/check_pwd', component: resolve => require(['@/components/Start'], resolve), name: '密码校验' }
+                { path: '/online_check', component: resolve => require(['@/components/checkOnline'], resolve), name: '在线检测' },
+                { path: '/check_pwd', component: resolve => require(['@/components/checkPassword'], resolve), name: '密码校验' }
             ]
         },
         {

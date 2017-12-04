@@ -3,7 +3,7 @@
         <el-row>
             <el-col :span="4">
                 <el-input
-                    placeholder="网关编号"
+                    placeholder="门锁编号"
                     clearable
                     v-model="key">
                 </el-input>
@@ -81,8 +81,7 @@ export default {
     watch:{
             key: function () {
                 if(this.key == ''){
-                    this.currentPage = 1;
-                    this.getList();
+                    console.log(this.key)
                 }
             }
         },

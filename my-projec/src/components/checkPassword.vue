@@ -1,5 +1,5 @@
 <template>
-    <div class="gate-check">
+    <div class="check-password">
         <el-row>
             <el-col :span="4">
                 <el-input
@@ -19,32 +19,20 @@
                 v-loading="loading"
                 style="width: 100%">
                 <el-table-column
-                    prop="gatewayNo"
-                    label="网关编号">
+                    prop="createTime"
+                    label="校验时间">
                 </el-table-column>
                 <el-table-column
-                    prop="outlineTime"
-                    label="掉线次数">
+                    prop="adminCode"
+                    label="后台压缩码">
                 </el-table-column>
                 <el-table-column
-                    prop="allTime"
-                    label="总时间">
+                    prop="paramCode"
+                    label="网关压缩码">
                 </el-table-column>
                 <el-table-column
-                    prop="outlineTimestamp"
-                    label="掉线时间">
-                </el-table-column>
-                <el-table-column
-                    prop="outlineTimestamp"
-                    label="查看">
-                    <template slot-scope="scope">
-                        <el-button
-                            @click.native.prevent="viewDetail(scope.$index)"
-                            type="text"
-                            size="small">
-                            查看
-                        </el-button>
-                    </template>
+                    prop="datas"
+                    label="后台原数据">
                 </el-table-column>
             </el-table>
             <div class="page">
@@ -91,10 +79,10 @@ export default {
                 let pram = {
 					limit:this.pageSize,
 					offset:this.currentPage,
-					number:this.key
+					locksNo:this.key
                 };
                 this.loading = true;
-                this.$http.get('api/log/gateway',{params:pram}).then(response => {
+                this.$http.get('api/log/crcDetail',{params:pram}).then(response => {
                     if(response.data.code === 0){
                         this.tableData = response.data.response.list;
                         this.total = response.data.response.totalCount;
