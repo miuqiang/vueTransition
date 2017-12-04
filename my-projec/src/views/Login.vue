@@ -1,11 +1,11 @@
 <template>
-    <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-container">
+    <el-form :model="ruleForm" :rules="rules2" ref="ruleForm" label-position="left" label-width="0px" class="demo-ruleForm login-container">
         <h3 class="title">系统登录</h3>
-        <el-form-item prop="account">
-            <el-input type="text" v-model="ruleForm2.account" auto-complete="off" placeholder="账号"></el-input>
+        <el-form-item prop="username">
+            <el-input type="text" v-model="ruleForm.username" autofocus auto-complete="off" placeholder="账号"></el-input>
         </el-form-item>
-        <el-form-item prop="checkPass">
-            <el-input type="password" v-model="ruleForm2.password" auto-complete="off" placeholder="密码"></el-input>
+        <el-form-item prop="password">
+            <el-input type="password" v-model="ruleForm.password" auto-complete="off" placeholder="密码"></el-input>
         </el-form-item>
         <el-form-item style="width:100%;">
         <el-button type="primary" style="width:100%;" @click.native.prevent="loginIn" :loading="logining">登录</el-button>
@@ -18,48 +18,43 @@
         data(){
             return {
                 logining: false,
-                ruleForm2: {
-                    account: '',
+                ruleForm: {
+                    username: '',
                     password: ''
                 },
                 rules2: {
-                account: [
+                username: [
                     { required: true, message: '请输入账号', trigger: 'blur' },
-                    //{ validator: validaePass }
                 ],
-                checkPass: [
+                password: [
                     { required: true, message: '请输入密码', trigger: 'blur' },
-                    //{ validator: validaePass2 }
                 ]
                 },
                 checked: true
             }
         },
         methods:{
-            loginIn(ev) {
-                var _this = this;
-                this.$refs.ruleForm2.validate((valid) => {
+            loginIn() {
+                var str = 'username='+this.ruleForm.username+'&password='+this.ruleForm.password;
+                this.$refs.ruleForm.validate((valid) => {
                     if (valid) {
-                        //_this.$router.replace('/table');
                         this.logining = true;
-                        //NProgress.start();
-                        var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
-                        requestLogin(loginParams).then(data => {
-                        this.logining = false;
-                        //NProgress.done();
-                        let { msg, code, user } = data;
-                        if (code !== 200) {
-                            this.$message({
-                            message: msg,
-                            type: 'error'
-                            });
-                        } else {
-                            sessionStorage.setItem('user', JSON.stringify(user));
-                            this.$router.push({ path: '/table' });
-                        }
-                        });
+
+                        this.$http.post('login?'+str).then(response => {
+                            console.log(response)
+                            if(response.data.code === 0){
+                                localStorage.setItem("token",response.data.token);
+                                this.$router.push('/start');
+                            }else{
+                                this.$message({message: response.data.msg});
+                            }
+                            this.logining = false;
+                        }, response => {
+                            // error callback
+                            this.logining = false;
+
+                        })
                     } else {
-                        console.log('error submit!!');
                         return false;
                     }
                 });

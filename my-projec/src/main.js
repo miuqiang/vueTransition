@@ -11,27 +11,37 @@ Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 
-axios.defaults.baseURL = '';
+axios.defaults.baseURL = 'http://dz.ickkey.com:8085/'
 Vue.prototype.$http = axios
 
 
 // 添加一个请求拦截器
-axios.interceptors.request.use(function (config) {
-    return config;
-}, function (error) {
-    // Do something with request error
+axios.interceptors.request.use(
+    config => {
+        if (localStorage.getItem('token')) {
+            config.headers.token =  localStorage.getItem('token');
+        }
+        return config;
+    },
+    err => {
+        return Promise.reject(err);
+});
+/*
+// 添加一个响应拦截器
+axios.interceptors.response.use(function (response){
+    // 处理响应数据
+
+    return response;
+    }, function (error){
+    // 处理响应失败
+    console.log(error.response)
+    if(response.data.code === 501){
+        //token失效，重新登录
+        router.replace({path:'/login'});
+    }
     return Promise.reject(error);
 });
-
-
-// 添加一个响应拦截器
-axios.interceptors.response.use(function (config) {
-    return config;
-}, function (error) {
-    // Do something with request error
-    console.log(error.response.data.message);
-    return Promise.reject(error.response.data.message);
-});
+*/
 
 /* eslint-disable no-new */
 new Vue({

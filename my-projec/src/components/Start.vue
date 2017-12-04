@@ -1,15 +1,23 @@
 <template>
-    <div class="home">
-        <h1>this is bar</h1>
+    <div class="start">
+        <el-row>
+            <el-col :span="24">
+                <el-input
+                    placeholder="网关编号11"
+                    prefix-icon="el-icon-search"
+                    v-model="key">
+                </el-input>
+            </el-col>
+        </el-row>
     </div>
 </template>
 
 <script>
 export default {
-  name: "hello",
+  name: "start",
   data() {
     return {
-
+        key:''
     };
   }
 };
@@ -17,23 +25,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1,
-h2 {
-  font-weight: normal;
-  background: red;
-}
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
 </style>

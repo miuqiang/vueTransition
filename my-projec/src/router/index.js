@@ -35,7 +35,7 @@ export default new Router({
             iconCls: 'el-icon-star-off',
             leaf: true,
             children: [
-                { path: '/checkgateway', component: resolve => require(['@/components/Start'], resolve), name: '网关检测' }
+                { path: '/checkgateway', component: resolve => require(['@/components/GateCheck'], resolve), name: '网关检测' }
             ]
         },
         {
