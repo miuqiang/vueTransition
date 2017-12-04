@@ -41,9 +41,9 @@
                         this.logining = true;
 
                         this.$http.post('login?'+str).then(response => {
-                            console.log(response)
                             if(response.data.code === 0){
                                 localStorage.setItem("token",response.data.token);
+                                localStorage.setItem("username",this.ruleForm.username);
                                 this.$router.push('/start');
                             }else{
                                 this.$message({message: response.data.msg});

@@ -9,7 +9,6 @@
                 </el-input>
             </el-col>
             <el-col :span="2">
-                &nbsp;&nbsp;
                 <el-button plain icon="el-icon-search" @click.native="search">搜索</el-button>
             </el-col>
         </el-row>

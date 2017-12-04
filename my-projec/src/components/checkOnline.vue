@@ -9,7 +9,6 @@
                 </el-input>
             </el-col>
             <el-col :span="2">
-                &nbsp;&nbsp;
                 <el-button plain icon="el-icon-search" @click.native="search">搜索</el-button>
             </el-col>
         </el-row>
@@ -19,8 +18,8 @@
                 v-loading="loading"
                 style="width: 100%">
                 <el-table-column
-                    prop="gatewayNo"
-                    label="网关编号">
+                    prop="locksNo"
+                    label="门锁编号">
                 </el-table-column>
                 <el-table-column
                     prop="outlineTime"
@@ -33,18 +32,6 @@
                 <el-table-column
                     prop="outlineTimestamp"
                     label="掉线时间">
-                </el-table-column>
-                <el-table-column
-                    prop="outlineTimestamp"
-                    label="查看">
-                    <template slot-scope="scope">
-                        <el-button
-                            @click.native.prevent="viewDetail(scope.$index)"
-                            type="text"
-                            size="small">
-                            查看
-                        </el-button>
-                    </template>
                 </el-table-column>
             </el-table>
             <div class="page">
@@ -93,7 +80,7 @@ export default {
 					number:this.key
                 };
                 this.loading = true;
-                this.$http.get('api/log/gateway',{params:pram}).then(response => {
+                this.$http.get('api/log/locks',{params:pram}).then(response => {
                     if(response.data.code === 0){
                         this.tableData = response.data.response.list;
                         this.total = response.data.response.totalCount;
@@ -112,15 +99,13 @@ export default {
                 this.getList();
             },
             handleCurrentChange(val){
+                console.log(val);
                 this.currentPage = val;
                 this.getList();
             },
             search(){
                 this.currentPage = 1;
                 this.getList();
-            },
-            viewDetail(){
-
             }
         }
 };
