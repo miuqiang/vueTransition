@@ -6,14 +6,18 @@ import router from './router'
 import axios from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import * as custom from './util/filters';
 
 Vue.use(ElementUI)
+
+Object.keys(custom).forEach(key => {
+    Vue.filter(key, custom[key])
+})
 
 Vue.config.productionTip = false
 
 axios.defaults.baseURL = 'http://dz.ickkey.com:8085/'
 Vue.prototype.$http = axios
-
 
 // 添加一个请求拦截器
 axios.interceptors.request.use(
@@ -26,6 +30,24 @@ axios.interceptors.request.use(
     err => {
         return Promise.reject(err);
 });
+
+router.beforeEach((to, from, next) => {
+    if (to.meta.requireAuth) {
+        if (localStorage.getItem('token')) {
+            next();
+        }
+        else {
+            next({
+                path: '/login',
+                // query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+            })
+        }
+    }
+    else {
+        next();
+    }
+})
+
 /*
 // 添加一个响应拦截器
 axios.interceptors.response.use(function (response){

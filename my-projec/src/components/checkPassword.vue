@@ -75,9 +75,10 @@ export default {
         },
     methods:{
             getList() {
+                var offset = (this.currentPage -1)*this.pageSize + 1;
                 let pram = {
 					limit:this.pageSize,
-					offset:this.currentPage,
+					offset:offset,
 					locksNo:this.key
                 };
                 this.loading = true;

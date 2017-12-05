@@ -25,7 +25,7 @@ export default new Router({
             leaf: true,
             redirect:'/start',
             children: [
-                { path: '/start', component: resolve => require(['@/components/Start'], resolve), name: '启动' }
+                { path: '/start', component: resolve => require(['@/components/Start'], resolve), name: '启动', meta:{requireAuth: true,} }
             ]
         },
         {
@@ -35,7 +35,7 @@ export default new Router({
             iconCls: 'el-icon-star-off',
             leaf: true,
             children: [
-                { path: '/checkgateway', component: resolve => require(['@/components/GateCheck'], resolve), name: '网关检测' }
+                { path: '/checkgateway', component: resolve => require(['@/components/GateCheck'], resolve), name: '网关检测' ,meta:{requireAuth: true,}}
             ]
         },
         {
@@ -44,8 +44,8 @@ export default new Router({
             name: '门锁检测',
             iconCls: 'el-icon-tickets',
             children: [
-                { path: '/online_check', component: resolve => require(['@/components/checkOnline'], resolve), name: '在线检测' },
-                { path: '/check_pwd', component: resolve => require(['@/components/checkPassword'], resolve), name: '密码校验' }
+                { path: '/online_check', component: resolve => require(['@/components/checkOnline'], resolve), name: '在线检测',meta:{requireAuth: true,} },
+                { path: '/check_pwd', component: resolve => require(['@/components/checkPassword'], resolve), name: '密码校验' ,meta:{requireAuth: true,}}
             ]
         },
         {

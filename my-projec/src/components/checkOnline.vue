@@ -28,10 +28,20 @@
                 <el-table-column
                     prop="allTime"
                     label="总时间">
+                    <template slot-scope="scope">
+                        <span>
+                            {{scope.row.allTime | timesfilter}}
+                        </span>
+                    </template>
                 </el-table-column>
                 <el-table-column
                     prop="outlineTimestamp"
                     label="掉线时间">
+                    <template slot-scope="scope">
+                        <span>
+                            {{scope.row.outlineTimestamp | timesfilter}}
+                        </span>
+                    </template>
                 </el-table-column>
             </el-table>
             <div class="page">
@@ -68,16 +78,19 @@ export default {
     watch:{
             key: function () {
                 if(this.key == ''){
-                    console.log(this.key)
+                    this.currentPage = 1;
+                    this.getList();
                 }
             }
         },
     methods:{
             getList() {
+                var offset = (this.currentPage -1)*this.pageSize + 1;
+
                 let pram = {
 					limit:this.pageSize,
-					offset:this.currentPage,
-					number:this.key
+					offset:offset,
+					numbers:this.key
                 };
                 this.loading = true;
                 this.$http.get('api/log/locks',{params:pram}).then(response => {
@@ -99,7 +112,6 @@ export default {
                 this.getList();
             },
             handleCurrentChange(val){
-                console.log(val);
                 this.currentPage = val;
                 this.getList();
             },
