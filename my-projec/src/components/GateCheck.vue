@@ -145,7 +145,7 @@ export default {
         },
     methods:{
         getList() {
-            var offset = (this.currentPage -1)*this.pageSize + 1;
+            var offset = (this.currentPage == 1) ? 0 : ((this.currentPage -1)*this.pageSize);
             let pram = {
                 limit:this.pageSize,
                 offset:offset,
@@ -188,7 +188,7 @@ export default {
             this.getList();
         },
         viewDetail(row){
-            var offset = (this.currentPage1 -1)*this.pageSize1 + 1;
+            var offset = (this.currentPage == 1) ? 0 : ((this.currentPage -1)*this.pageSize);
             this.dialogVisible = true;
             let prams = {
                     limit:this.pageSize1,

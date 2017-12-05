@@ -48,22 +48,18 @@ router.beforeEach((to, from, next) => {
     }
 })
 
-/*
 // 添加一个响应拦截器
 axios.interceptors.response.use(function (response){
     // 处理响应数据
-
-    return response;
-    }, function (error){
-    // 处理响应失败
-    console.log(error.response)
     if(response.data.code === 501){
         //token失效，重新登录
         router.replace({path:'/login'});
     }
+    return response;
+    }, function (error){
+    // 处理响应失败
     return Promise.reject(error);
 });
-*/
 
 /* eslint-disable no-new */
 new Vue({
