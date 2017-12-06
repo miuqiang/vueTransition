@@ -8,6 +8,7 @@
                     action="http://dz.ickkey.com:8085/api/log/upload/"
                     :on-success="handleAvatarSuccess"
                     :before-upload="beforeAvatarUpload"
+                    :on-progress="uploading"
                     :show-file-list="false"
                     :headers="headers">
                     <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
@@ -24,6 +25,7 @@
         <section class="main-box">
             <el-table
                 :data="tableData"
+                v-loading="loading"
                 style="width: 100%">
                 <el-table-column
                     prop="gateWays"
@@ -50,7 +52,8 @@ export default {
             },
             loading1:false,
             loading2:false,
-            loading3:false
+            loading3:false,
+            loading:false
         };
     },
     methods:{
@@ -96,20 +99,23 @@ export default {
                     data[j].gateWays = gateways[j]
                 }
                 this.tableData = data;
-                this.$message({message: '长传成功！'});
+                this.$message.success({message: '上传成功！'});
             }else{
                 this.$message({message: res.msg});
             }
+            this.loading = false;
         },
         beforeAvatarUpload(file){
             var file_type = (file.name).split('.')[1];
-            console.log(file_type)
             if (file_type == 'xlsx' || file_type =='xls') {
-
+                console.log('ok');
             }else{
                 this.$message.error('上传文件格式不对，只能是Excel表格!');
                 return false;
             }
+        },
+        uploading(event, file, fileList){
+            this.loading = true;
         }
     }
 };
