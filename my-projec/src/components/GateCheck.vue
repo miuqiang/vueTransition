@@ -142,7 +142,7 @@ export default {
                 this.getList();
             }
         }
-        },
+    },
     methods:{
         getList() {
             var offset = (this.currentPage == 1) ? 0 : ((this.currentPage -1)*this.pageSize);
