@@ -16,9 +16,9 @@
             </el-col>
             <el-col :span="24">
                 <div class="pdt-20">
-                    <el-button @click="changeStatus(2)" :loading="loading2" size="medium">开始</el-button>
-                    <el-button @click="changeStatus(1)" :loading="loading1" size="medium">停止</el-button>
-                    <el-button @click="changeStatus(3)" :loading="loading3" size="medium">清空</el-button>
+                    <el-button @click="changeStatus(2)" :loading="loading2">开始</el-button>
+                    <el-button @click="changeStatus(1)" :loading="loading1">停止</el-button>
+                    <el-button @click="changeStatus(3)" :loading="loading3">清空</el-button>
                 </div>
             </el-col>
         </el-row>
