@@ -66,13 +66,13 @@ export default {
         this.getList();
     },
     watch:{
-            key: function () {
-                if(this.key == ''){
-                    this.currentPage = 1;
-                    this.getList();
-                }
+        key: function () {
+            if(this.key == ''){
+                this.currentPage = 1;
+                this.getList();
             }
-        },
+        }
+    },
     methods:{
             getList() {
                 var offset = (this.currentPage == 1) ? 0 : ((this.currentPage -1)*this.pageSize);
