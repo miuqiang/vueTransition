@@ -19,7 +19,7 @@
             return {
                 logining: false,
                 ruleForm: {
-                    username: '',
+                    name: '',
                     password: ''
                 },
                 rules2: {
@@ -39,7 +39,6 @@
                 this.$refs.ruleForm.validate((valid) => {
                     if (valid) {
                         this.logining = true;
-
                         this.$http.post('login?'+str).then(response => {
                             if(response.data.code === 0){
                                 localStorage.setItem("token",response.data.token);

@@ -2,7 +2,7 @@
   "name": "news",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "weishichao <120472195@qq.com>",
+  "author": "miaoqiang <763436128@qq.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
