@@ -17,7 +17,7 @@ Object.keys(custom).forEach(key => {
 
 Vue.config.productionTip = false
 
-axios.defaults.baseURL = 'http://dz.ickkey.com:8085/'
+axios.defaults.baseURL = ''
 Vue.prototype.$http = axios
 
 // 添加一个请求拦截器
